@@ -9,6 +9,7 @@ This project explores overfitting and underfitting in machine learning through:
 - **Bias-Variance Decomposition** — mathematical derivation and Monte Carlo verification
 - **Polynomial Regression Experiments** — visual demonstration of underfitting, good fit, and overfitting
 - **Regularization Analysis** — Ridge (L2) and Lasso (L1) comparison with coefficient shrinkage visualization
+- **Deep Learning Experiments** — MLP overfitting on synthetic data and MNIST, with Dropout and Early Stopping
 
 ## Project Structure
 
@@ -17,26 +18,29 @@ src/                    Core Python modules (all logic lives here)
   data_generation.py      Synthetic data: f(x) = sin(2*pi*x) + noise
   polynomial_regression.py  Polynomial fitting + bias-variance decomposition
   regularization.py       Ridge / Lasso regression wrappers
+  deep_learning.py        MLP building, training, MNIST loading (PyTorch)
   visualization.py        All plotting functions
   utils.py                MSE, train/test split
 
 notebooks/              Jupyter notebooks (import from src/, demo only)
   01_polynomial_regression_demo.ipynb
   02_regularization_demo.ipynb
+  03_deep_learning_overfitting.ipynb
 
 report/                 LaTeX report
   main.tex                Report source
-  references.bib          Bibliography (7 references)
-  figures/                Generated visualizations (6 PNGs)
+  references.bib          Bibliography (8 references)
+  figures/                Generated visualizations (10 PNGs)
 
-tests/                  Unit tests (20 tests)
+tests/                  Unit tests (27 tests)
 slides/                 Presentation materials
+data/                   Downloaded datasets (gitignored)
 ```
 
 ## Quick Start
 
 ```bash
-# Install dependencies
+# Install dependencies (includes PyTorch)
 uv sync
 
 # Run all tests
@@ -45,15 +49,31 @@ uv run pytest tests/ -v
 # Execute notebooks (generates figures into report/figures/)
 uv run jupyter nbconvert --execute --inplace notebooks/01_polynomial_regression_demo.ipynb
 uv run jupyter nbconvert --execute --inplace notebooks/02_regularization_demo.ipynb
+uv run jupyter nbconvert --execute --inplace notebooks/03_deep_learning_overfitting.ipynb
 
 # Compile LaTeX report (requires pdflatex)
 cd report && pdflatex main.tex && bibtex main && pdflatex main.tex && pdflatex main.tex
 ```
 
+## MNIST Data
+
+Notebook 03 uses the MNIST dataset for the deep learning classification experiment. The data is **downloaded automatically** on first run via `torchvision.datasets.MNIST` and cached in the `data/` directory (~12 MB).
+
+If you prefer to download manually:
+
+```python
+import torchvision
+torchvision.datasets.MNIST(root="data", train=True, download=True)
+torchvision.datasets.MNIST(root="data", train=False, download=True)
+```
+
+The `data/` directory is gitignored and not included in the repository.
+
 ## Dependencies
 
 - Python >= 3.11
 - numpy, matplotlib, scikit-learn, jupyter, pytest
+- torch, torchvision (for deep learning experiments)
 - Managed via [uv](https://docs.astral.sh/uv/)
 
 ## Generated Figures
@@ -66,3 +86,7 @@ cd report && pdflatex main.tex && bibtex main && pdflatex main.tex && pdflatex m
 | `ridge_regularization.png` | Ridge: error & coefficient norm vs. alpha |
 | `lasso_regularization.png` | Lasso: error & coefficient norm vs. alpha |
 | `ridge_vs_lasso_coefficients.png` | Ridge vs. Lasso coefficient bar chart |
+| `dl_synthetic_overfitting.png` | MLP regression: shallow vs. deep fits |
+| `dl_training_curves.png` | Training curves with early stopping |
+| `dl_dropout_effect.png` | MNIST: with vs. without Dropout |
+| `dl_network_complexity.png` | Parameter count vs. test error |
