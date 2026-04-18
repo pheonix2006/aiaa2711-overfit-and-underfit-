@@ -25,3 +25,14 @@ report/*.synctex.gz
 
 # MNIST and other downloaded datasets
 data/
+
+# Superpowers docs (specs, plans)
+docs/
+
+# Additional LaTeX artifacts
+report/*.toc
+report/*.lof
+report/*.lot
+report/*.nav
+report/*.snm
+report/*.vrb

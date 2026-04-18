@@ -57,17 +57,7 @@ cd report && pdflatex main.tex && bibtex main && pdflatex main.tex && pdflatex m
 
 ## MNIST Data
 
-Notebook 03 uses the MNIST dataset for the deep learning classification experiment. The data is **downloaded automatically** on first run via `torchvision.datasets.MNIST` and cached in the `data/` directory (~12 MB).
-
-If you prefer to download manually:
-
-```python
-import torchvision
-torchvision.datasets.MNIST(root="data", train=True, download=True)
-torchvision.datasets.MNIST(root="data", train=False, download=True)
-```
-
-The `data/` directory is gitignored and not included in the repository.
+Notebook 03 uses the MNIST dataset (~12 MB), which is **auto-downloaded** on first run and cached in `data/` (gitignored). If auto-download fails, see the manual download instructions in the notebook cell comments.
 
 ## Dependencies
 
