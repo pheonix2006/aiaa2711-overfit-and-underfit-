@@ -8,3 +8,17 @@ wheels/
 
 # Virtual environments
 .venv
+
+# LaTeX build artifacts
+report/*.aux
+report/*.bbl
+report/*.blg
+report/*.log
+report/*.out
+report/*.pdf
+report/*.fls
+report/*.fdb_latexmk
+report/*.synctex.gz
+
+# Jupyter checkpoints
+.ipynb_checkpoints/
