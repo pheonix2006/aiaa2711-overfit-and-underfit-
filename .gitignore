@@ -22,3 +22,6 @@ report/*.synctex.gz
 
 # Jupyter checkpoints
 .ipynb_checkpoints/
+
+# MNIST and other downloaded datasets
+data/
