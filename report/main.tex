@@ -1,0 +1,188 @@
+\documentclass[12pt, a4paper]{article}
+
+% -- Packages --
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{hyperref}
+\usepackage[margin=1in]{geometry}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{natbib}
+\usepackage{float}
+
+\title{Overfitting and Underfitting in Machine Learning}
+\author{
+  Member A \and Member B \and Member C \\
+  \small AIAA 2711 --- 2025 Spring
+}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+This report explores the fundamental concepts of overfitting and underfitting in
+machine learning. We derive the bias-variance decomposition, demonstrate these
+phenomena through polynomial regression experiments, and analyze regularization
+techniques (Ridge and Lasso) as solutions. Applications in deep learning are discussed.
+\end{abstract}
+
+% ============================================
+\section{Introduction}
+\label{sec:introduction}
+
+% Background: why generalization matters in ML
+% Problem definition: overfitting vs. underfitting
+% Report objective and structure overview
+
+% ============================================
+\section{Theoretical Foundation}
+\label{sec:theory}
+
+\subsection{Overfitting and Underfitting: Definitions}
+
+% Formal definitions
+% Training error vs. test error
+
+\subsection{Bias-Variance Decomposition}
+
+Given a target $y = f(x) + \epsilon$ where $\epsilon \sim \mathcal{N}(0, \sigma^2)$,
+the expected prediction error for a model $\hat{f}(x)$ trained on dataset $D$ is:
+
+\begin{align}
+E_D\left[(y - \hat{f}(x))^2\right]
+&= \underbrace{\left(f(x) - E_D[\hat{f}(x)]\right)^2}_{\text{Bias}^2}
++ \underbrace{E_D\left[(\hat{f}(x) - E_D[\hat{f}(x)])^2\right]}_{\text{Variance}}
++ \underbrace{\sigma^2}_{\text{Irreducible Error}}
+\label{eq:bias-variance}
+\end{align}
+
+% Full derivation steps here
+% Interpretation: underfitting = high bias, overfitting = high variance
+
+\subsection{Model Complexity and the Tradeoff}
+
+% Model complexity vs. bias/variance curve
+% Optimal complexity point
+
+% ============================================
+\section{Experimental Design and Results}
+\label{sec:experiments}
+
+\subsection{Setup}
+
+% Data generation: f(x) = sin(2*pi*x) + noise
+% Polynomial regression as the model family
+
+\subsection{Polynomial Fitting: Visual Demonstration}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{figures/polynomial_fits.png}
+    \caption{Polynomial fits at degree 1 (underfitting), 4 (good fit), and 15 (overfitting).}
+    \label{fig:polynomial-fits}
+\end{figure}
+
+\subsection{Training vs. Test Error}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/error_vs_complexity.png}
+    \caption{Training and test error as a function of polynomial degree.}
+    \label{fig:error-complexity}
+\end{figure}
+
+\subsection{Bias-Variance Decomposition: Empirical Verification}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/bias_variance_tradeoff.png}
+    \caption{Empirical bias-variance tradeoff estimated via Monte Carlo simulation.}
+    \label{fig:bias-variance}
+\end{figure}
+
+% ============================================
+\section{Solutions: Regularization}
+\label{sec:regularization}
+
+\subsection{Ridge Regression (L2 Regularization)}
+
+The Ridge objective adds an L2 penalty:
+\begin{equation}
+\min_{\mathbf{w}} \| \mathbf{y} - \mathbf{X}\mathbf{w} \|_2^2 + \alpha \|\mathbf{w}\|_2^2
+\label{eq:ridge}
+\end{equation}
+
+% Closed-form solution: w = (X^T X + alpha I)^{-1} X^T y
+% Geometric interpretation
+
+\subsection{Lasso Regression (L1 Regularization)}
+
+The Lasso objective adds an L1 penalty:
+\begin{equation}
+\min_{\mathbf{w}} \| \mathbf{y} - \mathbf{X}\mathbf{w} \|_2^2 + \alpha \|\mathbf{w}\|_1
+\label{eq:lasso}
+\end{equation}
+
+% Sparsity property
+% Comparison with Ridge
+
+\subsection{Experimental Results}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{figures/ridge_regularization.png}
+    \caption{Ridge regression: error and coefficient norm vs. regularization strength.}
+    \label{fig:ridge}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{figures/lasso_regularization.png}
+    \caption{Lasso regression: error and coefficient norm vs. regularization strength.}
+    \label{fig:lasso}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{figures/ridge_vs_lasso_coefficients.png}
+    \caption{Ridge vs. Lasso: coefficient comparison at $\alpha = 0.01$.}
+    \label{fig:ridge-vs-lasso}
+\end{figure}
+
+\subsection{Cross-Validation}
+
+% K-fold cross-validation principle
+% How it helps select optimal model complexity / alpha
+
+\subsection{Other Techniques}
+
+% Early stopping (brief)
+% Dropout in neural networks (brief)
+
+% ============================================
+\section{Application in AI}
+\label{sec:application}
+
+% Overfitting in deep learning
+% Relationship between network depth/width and overfitting
+% Real-world examples
+
+% ============================================
+\section{Conclusion}
+\label{sec:conclusion}
+
+% Summary of key findings
+% Practical guidelines for managing overfitting/underfitting
+
+% ============================================
+\bibliographystyle{plainnat}
+\bibliography{references}
+
+\end{document}
