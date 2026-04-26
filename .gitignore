@@ -36,3 +36,14 @@ report/*.lot
 report/*.nav
 report/*.snm
 report/*.vrb
+
+# Slides LaTeX build artifacts
+slides/*.aux
+slides/*.log
+slides/*.nav
+slides/*.out
+slides/*.snm
+slides/*.toc
+
+# Office temp files
+slides/~$*
